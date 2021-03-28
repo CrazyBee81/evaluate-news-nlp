@@ -38,4 +38,8 @@ app.listen(8082, function () {
     console.log('Example app listening on port 8082!')
 })
 
-console.log(`Your API key is ${process.env.API_KEY}`);
+// GET route
+app.get('/key', function (req, res) {
+    res.send(process.env.API_KEY)
+})
+

@@ -2,15 +2,46 @@ function handleSubmit(event) {
     event.preventDefault()
 
     // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    Client.checkForName(formText)
+    const baseURL = 'https://api.meaningcloud.com/sentiment-2.1';
 
-    console.log("::: Form Submitted :::")
-    fetch('http://localhost:8081/test')
-    .then(res => res.json())
-    .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
-    })
+    document.getElementById('generate').addEventListener('click', performAction);
+
+    // getKey
+    const getKey = async () => {
+        const response = await fetch('/key');
+        try {
+            const newData = await response.data;
+            console.log(newData);
+            return newData;
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
+
+    function performAction(e) {
+        const formdata = new FormData();
+        formdata.append("key", getKey());
+        formdata.append("txt", document.querySelector('#txt').value);
+        formdata.append("lang", document.querySelector('#lang').value);
+
+        const requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow'
+        };
+        getNLPData(baseURL, requestOptions).then(() => {
+            console.log(response)
+        })
+    }
+
+    const getNLPData = async (baseURL, requestOptions) => {
+        const response = await fetch(baseURL, requestOptions).then(response => ({
+            status: response.status,
+            body: response.json()
+        })).then((status, body) => console.log(status, body)).
+        catch(error => console.log('error', error));
+    }
 }
 
-export { handleSubmit }
+
+export {handleSubmit}
