@@ -19,10 +19,8 @@
 <main>
     <section>
         <form class="" onsubmit="return handleSubmit(event)">
-            <input id="lang" type="text" name="input" value="" onblur="" placeholder="language">
-            <input id="url" type="url"
-                   pattern="[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?"
-                   name="input" value="" onblur="" placeholder="url" required="required">
+            <input id="lang" type="text" name="input" value="" onblur="" placeholder="language" required="required">
+            <input id="url" type="url" name="input" value="" onblur="" placeholder="url" required="required">
             <input id="generate" type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)"
                    onsubmit="return Client.handleSubmit(event)">
         </form>
@@ -32,13 +30,15 @@
         <div id="results">
             <div class="flex-container">
                 <div><strong>Model for evaluation:</strong></div>
-                <div><strong>Agreement between the sentiments detected in the tex:</strong></div>
+                <div><strong>Agreement detected in the tex:</strong></div>
                 <div><strong>Irony of the text:</strong></div>
+                <div><strong>Polarity of the text:</strong></div>
             </div>
             <div class="flex-container">
                 <div id="model"></div>
                 <div id="agreement"></div>
                 <div id="irony"></div>
+                <div id="polarity"></div>
             </div>
         </div>
     </section>

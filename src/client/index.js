@@ -1,4 +1,4 @@
-import { checkForName } from './js/nameChecker'
+import { validateImput } from './js/imputChecker'
 import { handleSubmit } from './js/formHandler'
 
 import './styles/resets.scss'
@@ -6,14 +6,10 @@ import './styles/base.scss'
 import './styles/form.scss'
 import './styles/footer.scss'
 import './styles/header.scss'
-import './styles/resets.scss'
-
-console.log(checkForName);
-
-alert("I EXIST")
+import './styles/results.scss'
 
 export {
-    checkForName,
+    validateImput,
     handleSubmit
 }
 
