@@ -40,6 +40,7 @@ app.listen(8082, function () {
 
 // GET route
 app.get('/key', function (req, res) {
-    res.send(process.env.API_KEY)
+    res.json({'key': process.env.API_KEY});
+    console.log(process.env.API_KEY)
 })
 
