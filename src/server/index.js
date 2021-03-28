@@ -13,7 +13,7 @@ var json = {
 }
 
 const app = express()
-app.use(cors())
+
 // to use json
 app.use(bodyParser.json())
 // to use url encoded values
@@ -40,7 +40,6 @@ app.listen(8082, function () {
 
 // GET route
 app.get('/key', function (req, res) {
-    res.json({'key': process.env.API_KEY});
-    console.log(process.env.API_KEY)
+    res.json(process.env.API_KEY)
 })
 
