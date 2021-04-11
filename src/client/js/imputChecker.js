@@ -27,8 +27,9 @@ function validateImput(formdata) {
     }
 
     if (!valid) {
-        for (msg of massages) {
+        for (var msg of massages) {
             alert(msg);
+            massages = [];
         }
     }
 

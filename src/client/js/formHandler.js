@@ -2,7 +2,7 @@ function handleSubmit(event) {
     event.preventDefault()
 
     // check what text was put into the form field
-    const apiKey = 'c1ac7369879b1be57b73938699d3ad34';
+
     const baseURL = 'https://api.meaningcloud.com/sentiment-2.1';
 
     document.getElementById('generate').addEventListener('click', performAction);
@@ -10,7 +10,7 @@ function handleSubmit(event) {
 
     function performAction(e) {
         const formdata = new FormData();
-        formdata.append("key", apiKey);
+        formdata.append("key", getAPIKey());
         formdata.append("url", document.querySelector('#url').value);
         formdata.append("lang", document.querySelector('#lang').value);
 
@@ -27,6 +27,16 @@ function handleSubmit(event) {
                 document.getElementById('irony').innerHTML = response.irony;
                 document.getElementById('polarity').innerHTML = response.score_tag;
             })
+        }
+    }
+
+    const getAPIKey = async () => {
+        const response = await fetch('http://localhost:8082/key');
+        try {
+            const newData = await response.json();
+            return newData;
+        } catch (error) {
+            console.log("error", error);
         }
     }
 
