@@ -13,9 +13,7 @@ app.use(cors())
 // to use json
 app.use(bodyParser.json())
 // to use url encoded values
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static('dist'))
 
@@ -24,8 +22,8 @@ app.get('/', function (req, res) {
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(8082, function () {
-    console.log('Example app listening on port 8082!')
+app.listen(8081, function () {
+    console.log('Example app listening on port 8081!')
 })
 
 // GET route
@@ -46,8 +44,8 @@ function addMeaningfulData(req,res){
     }
 
     projectData[Object.keys(projectData).length] = newEntry;
-    console.log(newEntry)
-    res.send(projectData[0])
+    console.log(projectData[Object.keys(projectData).length-1])
+    res.send(projectData[Object.keys(projectData).length-1])
 }
 
 // GET route

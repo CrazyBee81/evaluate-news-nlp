@@ -10,12 +10,12 @@ function handleSubmit(event) {
 
     function performAction(e) {
         const formdata = new FormData();
-        getData("http://localhost:8082/key").then((response) => {
+        getData("http://localhost:8081/key").then((response) => {
             formdata.append("key", response);
             formdata.append("url", document.querySelector('#url').value);
             formdata.append("lang", document.querySelector('#lang').value);
             if (Client.validateImput(formdata)) {
-                postData(baseURL, formdata).then((response) => {
+                postFormData(baseURL, formdata).then((response) => {
                     let newData = response;
                     newData = {
                         model: newData.model,
@@ -24,7 +24,7 @@ function handleSubmit(event) {
                         score_tag: newData.score_tag
                     }
                     console.log(newData);
-                    postData('/add', {}, JSON.stringify({newData}).then(() => {
+                    postJSONData('http://localhost:8081/add', newData).then(() => {
                         updateUI()
                     });
                 })
@@ -43,9 +43,29 @@ function handleSubmit(event) {
         }
     }
 
+
     // Async POST
-    const postData = async (url = '', data = {}) => {
+    const postFormData = async (url = '', data) => {
         const response = await fetch(url, {method: 'POST', body: data});
+        try {
+            const newData = await response.json();
+            console.log(newData)
+            return newData;
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
+
+    // Async POST
+    const postJSONData = async (url = '', data) => {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
         try {
             const newData = await response.json();
             console.log(newData)
@@ -59,12 +79,13 @@ function handleSubmit(event) {
 // updateUI
 const updateUI = async () => {
     try {
-        const response = await fetch("http://localhost:8082/all");
-        console.log(response);
-        document.getElementById('model').innerHTML = response.model;
-        document.getElementById('agreement').innerHTML = response.agreement;
-        document.getElementById('irony').innerHTML = response.irony;
-        document.getElementById('polarity').innerHTML = response.score_tag;
+        const response = await fetch("http://localhost:8081/all");
+        response.json().then(data => {
+            document.getElementById('model').innerHTML = data.model;
+            document.getElementById('agreement').innerHTML = data.agreement;
+            document.getElementById('irony').innerHTML = data.irony;
+            document.getElementById('polarity').innerHTML = data.score_tag;
+        });
     } catch (error) {
         console.log("error", error);
     }
