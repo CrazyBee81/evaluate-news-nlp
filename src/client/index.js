@@ -1,5 +1,9 @@
 import { validateImput } from './js/imputChecker'
-import { handleSubmit } from './js/formHandler'
+import { performAction } from './js/formHandler'
+import { getData } from './js/formHandler'
+import { postFormData } from './js/formHandler'
+import { postJSONData } from './js/formHandler'
+
 
 import './styles/resets.scss'
 import './styles/base.scss'
@@ -10,6 +14,9 @@ import './styles/results.scss'
 
 export {
     validateImput,
-    handleSubmit
+    performAction,
+    getData,
+    postFormData,
+    postJSONData
 }
 

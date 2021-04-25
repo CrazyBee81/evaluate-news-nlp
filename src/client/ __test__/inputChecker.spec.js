@@ -1,15 +1,16 @@
 // Import the js file to test
-import { validateImput } from "../client/js/imputChecker"
+import { validateImput } from "../js/imputChecker"
 
 const formData = new FormData();
 formData.append("url", "https://www.udacity.com/");
-formData.append("lang", "es");
+formData.append("lang", "en");
 
 
-describe("Filter function", () => {
-    test("it should filter by a search term (link)", () => {
+describe("url and language validation", () => {
+    test("a valid url and language code should return a value of true", () => {
         const input = formData;
         const output = true;
         expect(validateImput(input)).toEqual(output);
     });
 });
+

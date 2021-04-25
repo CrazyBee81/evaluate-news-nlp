@@ -18,11 +18,10 @@
 
 <main>
     <section>
-        <form class="" onsubmit="return handleSubmit(event)">
+        <form class="" onsubmit="return Client.performAction(event)">
             <input id="lang" type="text" name="input" value="" onblur="" placeholder="language" required="required">
             <input id="url" type="url" name="input" value="" onblur="" placeholder="url" required="required">
-            <input id="generate" type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)"
-                   onsubmit="return Client.handleSubmit(event)">
+            <input id="generate" type="submit" name="" value="submit" onsubmit="return Client.performAction(event)">
         </form>
     </section>
 
