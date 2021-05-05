@@ -1,5 +1,6 @@
 // Import the js file to test
 import {getData} from "../js/formHandler"
+import "babel-polyfill";
 
 describe("testing getData", () => {
     test("get Data should return api key", () => {
